@@ -1,4 +1,4 @@
-# EDA — Estructuras de Datos y Algoritmos (UNMSM)
+# EDA — Estructuras de Datos y Algoritmos (UNMSM) 2026-0
 
 Biblioteca educativa de estructuras de datos y algoritmos en C++17 para el curso de EDA de la Universidad Nacional Mayor de San Marcos.
 
