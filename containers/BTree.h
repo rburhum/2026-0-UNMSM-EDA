@@ -8,9 +8,12 @@
 
 #define DEFAULT_BTREE_ORDER 3
 
+/**
+ * B-Tree container supporting Insert, Remove, Search, ForEach, and FirstThat.
+ * Parameterized by key type and object ID type.
+ */
 template <typename keyType, typename ObjIDType = long>
-class BTree 
-// this is the full version of the BTree
+class BTree
 {
        typedef CBTreePage <keyType, ObjIDType> BTNode;// useful shorthand
        /*struct ObjectInfo
@@ -34,8 +37,11 @@ public:
        //int           Open (char * name, int mode);
        //int           Create (char * name, int mode);
        //int           Close ();
+       /** Inserts a key-ObjID pair into the tree. Returns false if the key is a duplicate. */
        bool            Insert (const keyType key, const int ObjID);
+       /** Removes the entry matching the given key. Returns false if not found. */
        bool            Remove (const keyType key, const int ObjID);
+       /** Searches for a key and returns its associated ObjID, or -1 if not found. */
        ObjIDType       Search (const keyType key);
        long            size()  { return m_NumKeys; }
        long            height() { return m_Height;      }

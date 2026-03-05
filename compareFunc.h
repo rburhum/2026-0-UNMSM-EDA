@@ -12,10 +12,12 @@ template <typename T>
 bool Equal(const T &a, const T &b)
 { return a < b;  }
 
+/** Less-than comparison: returns true if a < b. */
 template <typename T>
 bool Menor(const T &a, const T &b)
 { return a < b;  }
 
+/** Greater-than comparison: returns true if a > b. */
 template <typename T>
 bool Mayor(const T &a, const T &b)
 { return !(a==b) && !(a < b);  }

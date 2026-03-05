@@ -2,6 +2,8 @@
 #define __GENERAL_ITERATOR_H__
 #include "../util.h"
 
+/** Base iterator for array-backed containers. Holds a pointer to the
+ *  container's internal data and a position index. */
 template <typename Container>
 struct GeneralIterator
 { public:

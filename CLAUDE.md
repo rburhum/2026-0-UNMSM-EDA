@@ -10,7 +10,8 @@ Educational data structures and algorithms library for UNMSM (Universidad Nacion
 
 ```bash
 make          # Build the project (produces ./main executable)
-make clean    # Remove object files and executable
+make test     # Build and run the Catch2 test suite
+make clean    # Remove object files, executables, and test artifacts
 ```
 
 The compiler is g++ with `-std=c++17 -Wall -g -pthread`. Source files must be added to `SRCS` in the Makefile.

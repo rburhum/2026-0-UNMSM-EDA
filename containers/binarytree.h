@@ -19,14 +19,18 @@ struct TreeTraitDescending {
 };
 
 template <typename Traits>
+class CBinaryTree;
+
+template <typename Traits>
 class NodeBinaryTree{
     using  value_type  = typename Traits::value_type;
-    using  Node        = typename NodeBinaryTree<Traits>;
+    using  Node        = NodeBinaryTree<Traits>;
     using  CompareFunc = typename Traits::CompareFunc;
+    friend class CBinaryTree<Traits>;
 private:
     value_type m_data;
     ref_type   m_ref;
-    Node *m_pChild[2]  = nullptr;
+    Node *m_pChild[2]  = {};
 public:
     NodeBinaryTree(){}
     NodeBinaryTree( value_type _value, ref_type _ref = -1)
@@ -35,11 +39,13 @@ public:
     value_type &GetValueRef() { return m_data; }
 };
 
+/** Binary search tree with trait-driven comparison.
+ *  The Traits parameter supplies value_type and a CompareFunc functor. */
 template <typename Traits>
 class CBinaryTree{
 public:
     using  value_type  = typename Traits::value_type;
-    using  Node        = typename NodeBinaryTree<Traits>;
+    using  Node        = NodeBinaryTree<Traits>;
     using  CompareFunc = typename Traits::CompareFunc;
 private:
     Node *m_pRoot = nullptr;
@@ -59,6 +65,9 @@ public:
 
     }
 private:
+    /** Recursively inserts a value into the BST. Uses comp(val, node) which
+     *  returns 0 or 1, indexing m_pChild[path] to select the left or right
+     *  child for descent. */
     void InternalInsert(Node *&rParent, const value_type &val, ref_type ref){
         if( !rParent ){
             rParent = new Node(val, ref);

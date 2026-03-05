@@ -38,6 +38,8 @@ public:
     NodeLinkedList(){}
     NodeLinkedList( value_type _value, ref_type _ref = -1)
         : m_data(_value), m_ref(_ref){   }
+    NodeLinkedList( value_type _value, ref_type _ref, Node *pNext)
+        : m_data(_value), m_ref(_ref), m_pNext(pNext){   }
     value_type  GetValue   () const { return m_data; }
     value_type &GetValueRef() { return m_data; }
 
@@ -58,6 +60,8 @@ public:
     { return m_data < another.GetValue();   }
 };
 
+/** Sorted singly-linked list parameterized by traits that define
+ *  the value type and comparison functor for ordered insertion. */
 template <typename Traits>
 class CLinkedList {
     using  value_type  = typename Traits::value_type;
@@ -79,9 +83,12 @@ public:
     // TODO: Operadores de acceso []
 
     void push_back(value_type &val, ref_type ref);
+    /** Inserts a value into the list in sorted order. */
     void Insert(const value_type &val, ref_type ref);
     size_t getSize(){ return m_nElements;  }
 private:
+    /** Recursively traverses the list to find the correct sorted position
+     *  and inserts a new node there. */
     void InternalInsert(Node *&rParent, const value_type &val, ref_type ref);
 
     // TODO: Persistencia (write)
@@ -109,7 +116,7 @@ void CLinkedList<Traits>::push_back(value_type &val, ref_type ref){
 template <typename Traits>
 void CLinkedList<Traits>::InternalInsert(Node *&rParent, const value_type &val, ref_type ref){
     // TODO: Agregar algo para el caso de circular
-    if( !rParent || rParent->m_data > val ){
+    if( !rParent || rParent->GetValue() > val ){
         Node *pNew = new Node(val, ref, rParent);
         rParent = pNew;
         ++m_nElements;

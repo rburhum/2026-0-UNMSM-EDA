@@ -13,6 +13,7 @@ struct Trait1
     using T = _T;
 };
 
+/** Forward iterator for CArray. Increments position from 0 to size. */
 template <typename Container>
 class ArrayForwardIterator : public GeneralIterator<Container>
 { 
@@ -28,6 +29,7 @@ class ArrayForwardIterator : public GeneralIterator<Container>
     }
 };
 
+/** Backward iterator for CArray. Decrements position from size-1 to -1. */
 template <typename Container>
 class ArrayBackwardIterator : public GeneralIterator<Container>
 { 
@@ -43,6 +45,8 @@ class ArrayBackwardIterator : public GeneralIterator<Container>
     }
 };
 
+/** Dynamic array with automatic resize, forward/backward iterators,
+ *  and sort support. Parameterized by a Traits type. */
 template <typename Traits>
 class CArray {
     using value_type  = typename Traits::T;
@@ -84,20 +88,27 @@ class CArray {
     CArray(Size size);
     virtual ~CArray();
 
+    /** Appends an element with the given value and reference to the end. */
     void push_back(value_type value, ref_type ref);
+    /** Accesses element at index; auto-resizes if index exceeds capacity. */
     value_type &operator[](Size index);
     Size getSize() const
     {   return m_last + 1;  };
     void resize(Size delta = 10);
+    /** Sorts elements using BurbujaRecursivo with the given comparison. */
     void sort( CompareFunc pComp );
 
+    /** Returns a forward iterator to the first element. */
     forward_iterator begin()
     { return forward_iterator(this);  }
+    /** Returns a forward iterator past the last element. */
     forward_iterator end()
     { return forward_iterator(this, getSize());  }
 
+    /** Returns a backward iterator to the last element. */
     backward_iterator rbegin()
     { return backward_iterator(this, getSize()-1);  }
+    /** Returns a backward iterator before the first element. */
     backward_iterator rend()
     { return backward_iterator(this, -1);  }
 

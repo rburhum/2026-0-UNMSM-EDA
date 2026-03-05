@@ -7,9 +7,9 @@
                     // ContainerRange n, CompFunc pComp);
 
 
-// Bubble
+/** Recursive bubble sort that orders an array using a comparison function pointer. */
 template <typename T>
-void BurbujaRecursivo(T arr[], ContainerRange n, 
+void BurbujaRecursivo(T arr[], ContainerRange n,
                       bool (*pComp)(const T &, const T &) ) {
     if (n <= 1)
         return;
