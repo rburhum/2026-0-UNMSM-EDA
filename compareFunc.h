@@ -6,6 +6,8 @@
 // typedef bool (*CompFunc)(const ContainerElemType &, const ContainerElemType &);
 // C++11 en adelante
 
+using CompFunc = bool (*)(const ContainerElemType &, const ContainerElemType &);
+
 template <typename T>
 bool Equal(const T &a, const T &b)
 { return a < b;  }
