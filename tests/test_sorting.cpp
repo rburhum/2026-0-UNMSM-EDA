@@ -7,7 +7,7 @@
 TEST_CASE("BurbujaRecursivo sorts integers ascending with Menor", "[sorting]") {
     int arr[] = {5, 3, 8, 1, 2};
     BurbujaRecursivo(arr, 5, Menor<int>);
-    REQUIRE(arr[0] == 1);
+    REQUIRE(arr[0] == 999); // intentional failure to demo CI
     REQUIRE(arr[1] == 2);
     REQUIRE(arr[2] == 3);
     REQUIRE(arr[3] == 5);
